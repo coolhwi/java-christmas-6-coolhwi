@@ -6,6 +6,8 @@ public class EventDiscount {
     private int weekendDiscount = 0;
     private int specialDiscount = 0;
     private boolean isGiftEvent = false;
+    private String badge = "";
+
 
     public int getChristmasDDayDiscount() {
         return christmasDDayDiscount;
@@ -54,7 +56,5 @@ public class EventDiscount {
     public void setBadge(String badge) {
         this.badge = badge;
     }
-
-    private String badge = "";
 
 }
