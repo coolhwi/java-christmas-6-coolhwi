@@ -48,7 +48,7 @@ public class InputController {
         try {
             date = Integer.parseInt(inputDate);
         }catch (NumberFormatException e){
-            throw new IllegalArgumentException("[ERROR] 날짜를 숫자로 넣어 주세요");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
         if(date <1 || date > 31){
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
@@ -65,7 +65,7 @@ public class InputController {
             try {
                 menusAndNums.put(s[0],Integer.parseInt(s[1]));
             }catch (NumberFormatException e){
-                throw new IllegalArgumentException("[ERROR] 메뉴 수량을 숫자를 넣어주세요.");
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
         validateMenuName(menusAndNums);
@@ -77,7 +77,7 @@ public class InputController {
         menu = List.of(s);
         for(String key : menusAndNums.keySet()){
             if(!menu.contains(key)){
-                throw new IllegalArgumentException("[ERROR] 메뉴 이름이 잘못 되었습니다. 다시 입력 바랍니다.");
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
 
