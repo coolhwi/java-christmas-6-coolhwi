@@ -7,6 +7,27 @@ public class EventDiscount {
     private int specialDiscount = 0;
     private boolean isGiftEvent = false;
     private String badge = "";
+    private int totalMoney = 0;
+    private int totalBenefitMoney = 0;
+
+    public int getTotalBenefitMoney() {
+        return totalBenefitMoney;
+    }
+
+    public void setTotalBenefitMoney() {
+        totalBenefitMoney = christmasDDayDiscount + dailyDiscount + weekendDiscount + specialDiscount ;
+        if(isGiftEvent){
+            totalBenefitMoney += 25000;
+        }
+    }
+
+    public int getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(int totalMoney) {
+        this.totalMoney = totalMoney;
+    }
 
 
     public int getChristmasDDayDiscount() {

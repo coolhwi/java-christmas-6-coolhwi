@@ -8,7 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InputController {
-    Consumer consumer = new Consumer();
+    Consumer consumer;
+
+    public InputController(Consumer consumer){
+        this.consumer = consumer;
+    }
 
     public void print(){
         System.out.println(consumer.getDate());
@@ -76,14 +80,6 @@ public class InputController {
                 throw new IllegalArgumentException("[ERROR] 메뉴 이름이 잘못 되었습니다. 다시 입력 바랍니다.");
             }
         }
-//        menu.add("양송이수프");
-//        menu.add("타파스");
-//        menu.add("시저샐러드");
-//        menu.add("티본스테이크");
-//        menu.add("바비큐립");
-//        menu.add("해산물파스타");
-//        menu.add("크리스마스파스타");
-
 
     }
 }
