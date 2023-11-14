@@ -44,29 +44,32 @@ public class OutputView {
         System.out.println("");
 
     }
+
     public static void printBenefitDetail(EventDiscount eventDiscount) {
         System.out.println(BENEFITS);
-        if (eventDiscount.getChristmasDDayDiscount() != 0) {
-            System.out.printf("크리스마스 디데이 할인: -%d원", eventDiscount.getChristmasDDayDiscount());
+
+        printDiscount("크리스마스 디데이 할인", eventDiscount.getChristmasDDayDiscount());
+        printDiscount("평일 할인", eventDiscount.getDailyDiscount());
+        printDiscount("주말 할인", eventDiscount.getWeekendDiscount());
+        printDiscount("특별 할인", eventDiscount.getSpecialDiscount());
+
+        if (eventDiscount.isGiftEvent()) {
+            printDiscount("증정 이벤트", 25000);
         }
-        if (eventDiscount.getDailyDiscount() != 0) {
-            System.out.println("");
-            System.out.println("평일 할인: -"+eventDiscount.getDailyDiscount()+"원");
-        }
-        if(eventDiscount.getWeekendDiscount() != 0){
-            System.out.println("주말 할인: -"+eventDiscount.getWeekendDiscount()+"원");
-        }
-        if(eventDiscount.getSpecialDiscount() != 0){
-            System.out.println("특별 할인: -"+eventDiscount.getSpecialDiscount()+"원");
-        }
-        if(eventDiscount.isGiftEvent()){
-            System.out.println("증정 이벤트: -25000원");
-        }
-        if(eventDiscount.getTotalBenefitMoney() ==0){
+
+        if (eventDiscount.getTotalBenefitMoney() == 0) {
             System.out.println("없음");
         }
-        System.out.println("");
+
+        System.out.println();
     }
+
+    private static void printDiscount(String label, int discountAmount) {
+        if (discountAmount != 0) {
+            System.out.printf("%s: -%d원%n", label, discountAmount);
+        }
+    }
+
 
     public static void printTotalBenefitMoney(EventDiscount eventDiscount){
         System.out.println(TOTAL_BENEFITS);
