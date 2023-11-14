@@ -89,8 +89,8 @@ public class OutputView {
 
     public static void printEventBadge(int totalMoney){
         System.out.println(BADGE_EVENT);
-        if(totalMoney >= 5000 && totalMoney < 10000){
-            System.out.println("별");
+        if(totalMoney < 10000){
+            System.out.println("없음");
         }
         if(totalMoney >= 10000 && totalMoney <20000){
             System.out.println("트리");
