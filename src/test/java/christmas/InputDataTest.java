@@ -26,24 +26,25 @@ public class InputDataTest {
     @DisplayName("메뉴 이름이 이상하면 예외를 발생시킨다.")
     @Test
     void createErrorNotValidMenuName(){
-        assertThatThrownBy(() -> inputController.insertMenuAndNum("gkgkg-2"))
+        assertThatThrownBy(() -> inputController.processMenuAndNumInput("gkgkg-2"))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> inputController.insertMenuAndNum("gkgkg-"))
+        assertThatThrownBy(() -> inputController.processMenuAndNumInput("gkgkg-"))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> inputController.insertMenuAndNum("티본스테이크-22"))
+        assertThatThrownBy(() -> inputController.processMenuAndNumInput("티본스테이크-22"))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> inputController.insertMenuAndNum("티본스테이크--2"))
+        assertThatThrownBy(() -> inputController.processMenuAndNumInput("티본스테이크--2"))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> inputController.insertMenuAndNum("티본스테이크2"))
+        assertThatThrownBy(() -> inputController.processMenuAndNumInput("티본스테이크2"))
                 .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> inputController.insertMenuAndNum("티본스테이크-5,크리스마스파스타-16"))
+        assertThatThrownBy(() -> inputController.processMenuAndNumInput("티본스테이크-5,크리스마스파스타-16"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
 
     @DisplayName("티본스테이크 메뉴를 넣으면 소비자 객체에 잘 들어간다.")
     @Test
     void inputMenuTest(){
-        inputController.insertMenuAndNum("티본스테이크-1,크리스마스파스타-2");
+        inputController.processMenuAndNumInput("티본스테이크-1,크리스마스파스타-2");
         assertThat(consumer.getMenuAndNum().keySet().contains("티본스테이크"));
         assertThat(consumer.getMenuAndNum().keySet().contains("크리스마스파스타"));
         assertThat(consumer.getMenuAndNum().get("티본스테이크")==1);

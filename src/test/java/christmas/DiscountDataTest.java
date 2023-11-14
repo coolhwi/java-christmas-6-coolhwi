@@ -18,7 +18,7 @@ public class DiscountDataTest {
     @DisplayName("12월 3일 일때 크리스마스 디데이, 평일디저트, 특별할인이 들어간다.")
     @Test
     void dailyDiscountTest(){
-        inputController.insertMenuAndNum("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        inputController.processMenuAndNumInput("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         inputController.insertDate("3");
         discountController.proceedDiscount();
         assertThat(eventDiscount.getDailyDiscount() == 4046);
@@ -30,7 +30,7 @@ public class DiscountDataTest {
     @DisplayName("12월 5일 일때 크리스마스 디데이, 평일디저트할인이 들어간다.")
     @Test
     void dailyDiscountTest2(){
-        inputController.insertMenuAndNum("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        inputController.processMenuAndNumInput("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         inputController.insertDate("5");
         discountController.proceedDiscount();
         assertThat(eventDiscount.getDailyDiscount() == 4046);
@@ -41,7 +41,7 @@ public class DiscountDataTest {
     @DisplayName("12월 26일 일때 평일디저트할인이 들어간다.")
     @Test
     void dailyDiscountTest3(){
-        inputController.insertMenuAndNum("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        inputController.processMenuAndNumInput("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         inputController.insertDate("26");
         discountController.proceedDiscount();
         assertThat(eventDiscount.getDailyDiscount() == 4046);
@@ -52,7 +52,7 @@ public class DiscountDataTest {
     @DisplayName("12월 31일 일때 평일디저트할인이 들어간다.")
     @Test
     void dailyDiscountTest4(){
-        inputController.insertMenuAndNum("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        inputController.processMenuAndNumInput("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         inputController.insertDate("31");
         discountController.proceedDiscount();
         assertThat(eventDiscount.getDailyDiscount() == 4046);
@@ -63,7 +63,7 @@ public class DiscountDataTest {
     @DisplayName("12월 25일 일때 특별할인, 크리스마스 디데이 할인, 평일디저트할인이 들어간다.")
     @Test
     void dailyDiscountTest5(){
-        inputController.insertMenuAndNum("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        inputController.processMenuAndNumInput("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         inputController.insertDate("31");
         discountController.proceedDiscount();
         assertThat(eventDiscount.getDailyDiscount() == 4046);
@@ -75,7 +75,7 @@ public class DiscountDataTest {
     @DisplayName("12월 8일일때 크리스마스 디데이, 주말메인음식 할인이 들어간다.")
     @Test
     void weekendDiscountTest(){
-        inputController.insertMenuAndNum("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        inputController.processMenuAndNumInput("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         inputController.insertDate("8");
         discountController.proceedDiscount();
         assertThat(eventDiscount.getDailyDiscount() == 0);
@@ -86,7 +86,7 @@ public class DiscountDataTest {
     @DisplayName("12월 29일일때 주말 메인음식 할인이 들어간다.")
     @Test
     void weekendDiscountTest2(){
-        inputController.insertMenuAndNum("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        inputController.processMenuAndNumInput("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         inputController.insertDate("29");
         discountController.proceedDiscount();
         assertThat(eventDiscount.getDailyDiscount() == 0);

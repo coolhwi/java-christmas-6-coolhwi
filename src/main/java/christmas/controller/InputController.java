@@ -3,9 +3,7 @@ package christmas.controller;
 import christmas.Model.Consumer;
 import christmas.view.InputView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class InputController {
     Consumer consumer;
@@ -33,7 +31,7 @@ public class InputController {
     public void proceedInputMenuAndNum(){
         while(true) {
             try {
-                insertMenuAndNum(InputView.enterFoodAndNum());
+                processMenuAndNumInput(InputView.enterFoodAndNum());
                 break;
             }catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
@@ -56,23 +54,37 @@ public class InputController {
         consumer.setDate(date);
     }
 
-    public void insertMenuAndNum(String menuAndNum){
-        String notEmptyMenu = menuAndNum.replace(" ","");
-        List<String> menuNum = List.of(notEmptyMenu.split(","));
-        HashMap<String,Integer> menusAndNums = new HashMap<>();
+    public void processMenuAndNumInput(String menuAndNum) {
+        String notEmptyMenu = menuAndNum.replace(" ", "");
+        List<String> menuNumList = splitMenuAndNum(notEmptyMenu);
         validateMenuAndNum(menuAndNum);
-
-        for(String menuNums : menuNum){
-            String[] s = menuNums.split("-");
-            try {
-                menusAndNums.put(s[0],Integer.parseInt(s[1]));
-            }catch (NumberFormatException e){
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-            }
-        }
+        HashMap<String, Integer> menusAndNums = createMenuAndNumMap(menuNumList);
         validateMenuName(menusAndNums);
         validateMenuNum(menusAndNums);
         consumer.setMenuAndNum(menusAndNums);
+    }
+
+    private List<String> splitMenuAndNum(String menuAndNum) {
+        return List.of(menuAndNum.split(",")); // You may consider a different separator if needed
+    }
+
+    private HashMap<String, Integer> createMenuAndNumMap(List<String> menuNumList) {
+        HashMap<String, Integer> menusAndNums = new HashMap<>();
+
+        for (String menuNums : menuNumList) {
+            String[] s = menuNums.split("-");
+            try {
+                Set set = menusAndNums.keySet();
+                if(set.contains(s[0])) { //중복 메뉴 예외처리
+                    throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                }
+                menusAndNums.put(s[0], Integer.parseInt(s[1]));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }
+        }
+
+        return menusAndNums;
     }
     public void validateMenuNum(HashMap<String,Integer> menusAndNums){
         int totalOrderMenuNum = 0;
@@ -104,7 +116,11 @@ public class InputController {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
+        menuDuplicateCheck(menusAndNums);
         onlyDrinkCheck(menusAndNums);
+
+    }
+    public void menuDuplicateCheck(HashMap<String,Integer> menusAndNums){
 
     }
     public void onlyDrinkCheck(HashMap<String,Integer> menusAndNums){
