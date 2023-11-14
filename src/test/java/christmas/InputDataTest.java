@@ -39,7 +39,12 @@ public class InputDataTest {
         assertThatThrownBy(() -> inputController.processMenuAndNumInput("티본스테이크-5,크리스마스파스타-16"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
+    @DisplayName("메뉴 이름이 중복되면 예외를 발생시킨다.")
+    @Test
+    void createErrorDuplicationMenu(){
+        assertThatThrownBy(() -> inputController.processMenuAndNumInput("티본스테이크-2,티본스테이크-2"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 
     @DisplayName("티본스테이크 메뉴를 넣으면 소비자 객체에 잘 들어간다.")
     @Test
