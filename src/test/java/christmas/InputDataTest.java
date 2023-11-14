@@ -36,6 +36,8 @@ public class InputDataTest {
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> inputController.insertMenuAndNum("티본스테이크2"))
                 .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> inputController.insertMenuAndNum("티본스테이크-5,크리스마스파스타-16"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("티본스테이크 메뉴를 넣으면 소비자 객체에 잘 들어간다.")
