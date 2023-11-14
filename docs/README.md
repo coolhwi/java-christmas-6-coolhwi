@@ -1,3 +1,9 @@
+# 🐶 목차
+1. MVC 적용하기 위해 지킨 규칙
+2. MVC를 선택한 이유
+3. 기능 목록
+---
+
 ## 🖋 MVC 적용하기 위해 지킨 규칙
 1. Model은 Controller와 View에 의존하지 않아야 한다. 
    1. Model 내부에 Controller와 View에 관련된 코드가 있으면 간된다.
