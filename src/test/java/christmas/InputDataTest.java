@@ -50,4 +50,15 @@ public class InputDataTest {
         assertThat(consumer.getMenuAndNum().get("크리스마스파스타")==2);
     }
 
+    @DisplayName("음료만 주문하면 예외 발생 시킨다.")
+    @Test
+    void onlyDrinkOrder(){
+        assertThatThrownBy(() -> inputController.insertDate("제로콜라-1"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> inputController.insertDate("제로콜라-1,레드와인-2"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> inputController.insertDate("제로콜라-1,레드와인-1,샴페인-2"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

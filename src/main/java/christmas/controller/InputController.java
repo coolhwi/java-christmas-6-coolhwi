@@ -104,6 +104,20 @@ public class InputController {
                 throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
+        onlyDrinkCheck(menusAndNums);
 
+    }
+    public void onlyDrinkCheck(HashMap<String,Integer> menusAndNums){
+        String[] s = {"양송이수프","타파스","시저샐러드","티본스테이크","바비큐립","해산물파스타","크리스마스파스타","초코케이크","아이스크림"};
+        List<String> menus = List.of(s);
+        int count=0;
+        for(String menuName: menusAndNums.keySet()){
+            if(menus.contains(menuName)){
+                count++;
+            }
+        }
+        if(count == 0){
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
 }
