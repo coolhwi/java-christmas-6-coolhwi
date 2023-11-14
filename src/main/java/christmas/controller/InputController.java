@@ -60,6 +60,8 @@ public class InputController {
         String notEmptyMenu = menuAndNum.replace(" ","");
         List<String> menuNum = List.of(notEmptyMenu.split(","));
         HashMap<String,Integer> menusAndNums = new HashMap<>();
+        validateMenuAndNum(menuAndNum);
+
         for(String menuNums : menuNum){
             String[] s = menuNums.split("-");
             try {
@@ -69,7 +71,29 @@ public class InputController {
             }
         }
         validateMenuName(menusAndNums);
+        validateMenuNum(menusAndNums);
         consumer.setMenuAndNum(menusAndNums);
+    }
+    public void validateMenuNum(HashMap<String,Integer> menusAndNums){
+        int totalOrderMenuNum = 0;
+        for(String name: menusAndNums.keySet()){
+            totalOrderMenuNum += menusAndNums.get(name);
+        }
+        if(totalOrderMenuNum > 20){
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+    public void validateMenuAndNum(String menuAndNum){
+        String[] s = menuAndNum.split("-");
+        if(menuAndNum.equals("")){
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+        if(!menuAndNum.contains("-")){
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+        if(s.length == 1){
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
     public void validateMenuName(HashMap<String,Integer> menusAndNums){
         List<String> menu = new ArrayList<>();
