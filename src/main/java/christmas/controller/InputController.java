@@ -10,32 +10,33 @@ public class InputController {
     private static final String DATE_ERROR_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     private static final String MANU_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
 
-    public InputController(Consumer consumer){
+    public InputController(Consumer consumer) {
         this.consumer = consumer;
     }
 
-    public void print(){
+    public void print() {
         System.out.println(consumer.getDate());
         System.out.println(consumer.getMenuAndNum());
     }
-    public void proceedInputDate(){
-        while(true) {
+
+    public void proceedInputDate() {
+        while (true) {
             try {
                 insertDate(InputView.enterVisitDate());
                 break;
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
 
         }
     }
 
-    public void proceedInputMenuAndNum(){
-        while(true) {
+    public void proceedInputMenuAndNum() {
+        while (true) {
             try {
                 processMenuAndNumInput(InputView.enterFoodAndNum());
                 break;
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
 
@@ -43,14 +44,14 @@ public class InputController {
 
     }
 
-    public void insertDate(String inputDate){
+    public void insertDate(String inputDate) {
         int date = 0;
         try {
             date = Integer.parseInt(inputDate);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(DATE_ERROR_MESSAGE);
         }
-        if(date <1 || date > 31){
+        if (date < 1 || date > 31) {
             throw new IllegalArgumentException(DATE_ERROR_MESSAGE);
         }
         consumer.setDate(date);
@@ -77,7 +78,7 @@ public class InputController {
             String[] s = menuNums.split("-");
             try {
                 Set set = menusAndNums.keySet();
-                if(set.contains(s[0])) { //중복 메뉴 예외처리
+                if (set.contains(s[0])) { //중복 메뉴 예외처리
                     throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
                 }
                 menusAndNums.put(s[0], Integer.parseInt(s[1]));
@@ -88,33 +89,36 @@ public class InputController {
 
         return menusAndNums;
     }
-    public void validateMenuNum(HashMap<String,Integer> menusAndNums){
+
+    public void validateMenuNum(HashMap<String, Integer> menusAndNums) {
         int totalOrderMenuNum = 0;
-        for(String name: menusAndNums.keySet()){
+        for (String name : menusAndNums.keySet()) {
             totalOrderMenuNum += menusAndNums.get(name);
         }
-        if(totalOrderMenuNum > 20){
+        if (totalOrderMenuNum > 20) {
             throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
         }
     }
-    public void validateMenuAndNum(String menuAndNum){
+
+    public void validateMenuAndNum(String menuAndNum) {
         String[] s = menuAndNum.split("-");
-        if(menuAndNum.equals("")){
+        if (menuAndNum.equals("")) {
             throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
         }
-        if(!menuAndNum.contains("-")){
+        if (!menuAndNum.contains("-")) {
             throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
         }
-        if(s.length == 1){
+        if (s.length == 1) {
             throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
         }
     }
-    public void validateMenuName(HashMap<String,Integer> menusAndNums){
+
+    public void validateMenuName(HashMap<String, Integer> menusAndNums) {
         List<String> menu = new ArrayList<>();
-        String[] s = {"양송이수프","타파스","시저샐러드","티본스테이크","바비큐립","해산물파스타","크리스마스파스타","초코케이크","아이스크림","제로콜라","레드와인","샴페인"};
+        String[] s = {"양송이수프", "타파스", "시저샐러드", "티본스테이크", "바비큐립", "해산물파스타", "크리스마스파스타", "초코케이크", "아이스크림", "제로콜라", "레드와인", "샴페인"};
         menu = List.of(s);
-        for(String key : menusAndNums.keySet()){
-            if(!menu.contains(key)){
+        for (String key : menusAndNums.keySet()) {
+            if (!menu.contains(key)) {
                 throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
             }
         }
@@ -122,19 +126,21 @@ public class InputController {
         onlyDrinkCheck(menusAndNums);
 
     }
-    public void menuDuplicateCheck(HashMap<String,Integer> menusAndNums){
+
+    public void menuDuplicateCheck(HashMap<String, Integer> menusAndNums) {
 
     }
-    public void onlyDrinkCheck(HashMap<String,Integer> menusAndNums){
-        String[] s = {"양송이수프","타파스","시저샐러드","티본스테이크","바비큐립","해산물파스타","크리스마스파스타","초코케이크","아이스크림"};
+
+    public void onlyDrinkCheck(HashMap<String, Integer> menusAndNums) {
+        String[] s = {"양송이수프", "타파스", "시저샐러드", "티본스테이크", "바비큐립", "해산물파스타", "크리스마스파스타", "초코케이크", "아이스크림"};
         List<String> menus = List.of(s);
-        int count=0;
-        for(String menuName: menusAndNums.keySet()){
-            if(menus.contains(menuName)){
+        int count = 0;
+        for (String menuName : menusAndNums.keySet()) {
+            if (menus.contains(menuName)) {
                 count++;
             }
         }
-        if(count == 0){
+        if (count == 0) {
             throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
         }
     }

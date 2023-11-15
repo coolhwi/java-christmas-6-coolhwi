@@ -14,7 +14,7 @@ public class InputDataTest {
 
     @DisplayName("날짜를 1~31 범위를 벗어나거나 문자가 들어오면 예외를 발생시킨다.")
     @Test
-    void createErrorNotValidInputDate(){
+    void createErrorNotValidInputDate() {
         assertThatThrownBy(() -> inputController.insertDate("a"))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> inputController.insertDate(""))
@@ -25,7 +25,7 @@ public class InputDataTest {
 
     @DisplayName("메뉴 이름이 이상하면 예외를 발생시킨다.")
     @Test
-    void createErrorNotValidMenuName(){
+    void createErrorNotValidMenuName() {
         assertThatThrownBy(() -> inputController.processMenuAndNumInput("gkgkg-2"))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> inputController.processMenuAndNumInput("gkgkg-"))
@@ -39,26 +39,27 @@ public class InputDataTest {
         assertThatThrownBy(() -> inputController.processMenuAndNumInput("티본스테이크-5,크리스마스파스타-16"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
     @DisplayName("메뉴 이름이 중복되면 예외를 발생시킨다.")
     @Test
-    void createErrorDuplicationMenu(){
+    void createErrorDuplicationMenu() {
         assertThatThrownBy(() -> inputController.processMenuAndNumInput("티본스테이크-2,티본스테이크-2"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("티본스테이크 메뉴를 넣으면 소비자 객체에 잘 들어간다.")
     @Test
-    void inputMenuTest(){
+    void inputMenuTest() {
         inputController.processMenuAndNumInput("티본스테이크-1,크리스마스파스타-2");
         assertThat(consumer.getMenuAndNum().keySet().contains("티본스테이크"));
         assertThat(consumer.getMenuAndNum().keySet().contains("크리스마스파스타"));
-        assertThat(consumer.getMenuAndNum().get("티본스테이크")==1);
-        assertThat(consumer.getMenuAndNum().get("크리스마스파스타")==2);
+        assertThat(consumer.getMenuAndNum().get("티본스테이크") == 1);
+        assertThat(consumer.getMenuAndNum().get("크리스마스파스타") == 2);
     }
 
     @DisplayName("음료만 주문하면 예외 발생 시킨다.")
     @Test
-    void onlyDrinkOrder(){
+    void onlyDrinkOrder() {
         assertThatThrownBy(() -> inputController.insertDate("제로콜라-1"))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> inputController.insertDate("제로콜라-1,레드와인-2"))

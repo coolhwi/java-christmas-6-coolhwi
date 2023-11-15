@@ -1,7 +1,7 @@
 package christmas.Model;
 
 public class EventDiscount {
-    private int christmasDDayDiscount=0;
+    private int christmasDDayDiscount = 0;
     private int dailyDiscount = 0;
     private int weekendDiscount = 0;
     private int specialDiscount = 0;
@@ -15,8 +15,8 @@ public class EventDiscount {
     }
 
     public void setTotalBenefitMoney() {
-        totalBenefitMoney = christmasDDayDiscount + dailyDiscount + weekendDiscount + specialDiscount ;
-        if(isGiftEvent){
+        totalBenefitMoney = christmasDDayDiscount + dailyDiscount + weekendDiscount + specialDiscount;
+        if (isGiftEvent) {
             totalBenefitMoney += 25000;
         }
     }

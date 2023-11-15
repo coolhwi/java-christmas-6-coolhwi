@@ -3,9 +3,9 @@ package christmas.Model;
 import java.util.HashMap;
 
 public class Consumer {
-    private int date=0;
-    private HashMap<String,Integer> menuAndNum = new HashMap<>();
-    private HashMap<String,Integer> discountDetail = new HashMap<>();
+    private int date = 0;
+    private HashMap<String, Integer> menuAndNum = new HashMap<>();
+    private HashMap<String, Integer> discountDetail = new HashMap<>();
 
 
     public int getDate() {

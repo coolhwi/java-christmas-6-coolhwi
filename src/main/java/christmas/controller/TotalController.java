@@ -8,8 +8,9 @@ public class TotalController {
     Consumer consumer = new Consumer();
     EventDiscount eventDiscount = new EventDiscount();
     InputController inputController = new InputController(consumer);
-    DiscountController discountController = new DiscountController(consumer,eventDiscount);
-    public void run(){
+    DiscountController discountController = new DiscountController(consumer, eventDiscount);
+
+    public void run() {
 
         inputController.proceedInputDate();
         inputController.proceedInputMenuAndNum();
@@ -21,7 +22,8 @@ public class TotalController {
         outputRun();
 
     }
-    public void outputRun(){
+
+    public void outputRun() {
         OutputView.printOrderMenu(consumer);
         OutputView.printBeforeDiscountTotalMoney(eventDiscount);
         OutputView.printGiftDetail(eventDiscount);

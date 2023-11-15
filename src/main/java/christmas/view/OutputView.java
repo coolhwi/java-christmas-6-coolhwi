@@ -13,32 +13,33 @@ public class OutputView {
     private static final String AFTER_DISCOUNT_MONEY = "<할인 후 예상 결제 금액>";
     private static final String BADGE_EVENT = "<12월 이벤트 배지>";
 
-    public static void printDateOfVisited(int date){
-        System.out.printf(DATE_OF_VISITED,date);
+    public static void printDateOfVisited(int date) {
+        System.out.printf(DATE_OF_VISITED, date);
         System.out.println("");
     }
 
-    public static void printOrderMenu(Consumer consumer){
+    public static void printOrderMenu(Consumer consumer) {
         System.out.println("");
         System.out.println(ORDER_MENU);
-        for(String menu: consumer.getMenuAndNum().keySet()){
-            System.out.println(menu+" "+consumer.getMenuAndNum().get(menu)+"개");
+        for (String menu : consumer.getMenuAndNum().keySet()) {
+            System.out.println(menu + " " + consumer.getMenuAndNum().get(menu) + "개");
         }
     }
-    public static void printBeforeDiscountTotalMoney(EventDiscount eventDiscount){
+
+    public static void printBeforeDiscountTotalMoney(EventDiscount eventDiscount) {
         System.out.println("");
         System.out.println(BEFORE_DISCOUNT_MONEY);
         System.out.println(eventDiscount.getTotalMoney());
 
     }
 
-    public static void printGiftDetail(EventDiscount eventDiscount){
+    public static void printGiftDetail(EventDiscount eventDiscount) {
         System.out.println("");
         System.out.println(PRESENTATION_MENU);
-        if(eventDiscount.isGiftEvent()){
+        if (eventDiscount.isGiftEvent()) {
             System.out.println("샴페인 1개");
         }
-        if(!eventDiscount.isGiftEvent()){
+        if (!eventDiscount.isGiftEvent()) {
             System.out.println("없음");
         }
         System.out.println("");
@@ -71,31 +72,31 @@ public class OutputView {
     }
 
 
-    public static void printTotalBenefitMoney(EventDiscount eventDiscount){
+    public static void printTotalBenefitMoney(EventDiscount eventDiscount) {
         System.out.println(TOTAL_BENEFITS);
-        System.out.println("-"+eventDiscount.getTotalBenefitMoney());
+        System.out.println("-" + eventDiscount.getTotalBenefitMoney());
         System.out.println("");
     }
 
-    public static void printAfterDiscountMoney(EventDiscount eventDiscount){
+    public static void printAfterDiscountMoney(EventDiscount eventDiscount) {
         int afterDiscountMoney = eventDiscount.getTotalMoney() - eventDiscount.getTotalBenefitMoney();
-        if(eventDiscount.isGiftEvent()){
-            afterDiscountMoney+=25000;
+        if (eventDiscount.isGiftEvent()) {
+            afterDiscountMoney += 25000;
         }
         System.out.println(AFTER_DISCOUNT_MONEY);
-        System.out.println(afterDiscountMoney+"원");
+        System.out.println(afterDiscountMoney + "원");
         System.out.println("");
     }
 
-    public static void printEventBadge(int totalMoney){
+    public static void printEventBadge(int totalMoney) {
         System.out.println(BADGE_EVENT);
-        if(totalMoney < 10000){
+        if (totalMoney < 10000) {
             System.out.println("없음");
         }
-        if(totalMoney >= 10000 && totalMoney <20000){
+        if (totalMoney >= 10000 && totalMoney < 20000) {
             System.out.println("트리");
         }
-        if(totalMoney >= 20000){
+        if (totalMoney >= 20000) {
             System.out.println("산타");
         }
 
