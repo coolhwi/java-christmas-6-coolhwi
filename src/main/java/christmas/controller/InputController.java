@@ -7,6 +7,8 @@ import java.util.*;
 
 public class InputController {
     Consumer consumer;
+    private static final String DATE_ERROR_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
+    private static final String MANU_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
 
     public InputController(Consumer consumer){
         this.consumer = consumer;
@@ -46,10 +48,10 @@ public class InputController {
         try {
             date = Integer.parseInt(inputDate);
         }catch (NumberFormatException e){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(DATE_ERROR_MESSAGE);
         }
         if(date <1 || date > 31){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(DATE_ERROR_MESSAGE);
         }
         consumer.setDate(date);
     }
@@ -76,11 +78,11 @@ public class InputController {
             try {
                 Set set = menusAndNums.keySet();
                 if(set.contains(s[0])) { //중복 메뉴 예외처리
-                    throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                    throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
                 }
                 menusAndNums.put(s[0], Integer.parseInt(s[1]));
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
             }
         }
 
@@ -92,19 +94,19 @@ public class InputController {
             totalOrderMenuNum += menusAndNums.get(name);
         }
         if(totalOrderMenuNum > 20){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
         }
     }
     public void validateMenuAndNum(String menuAndNum){
         String[] s = menuAndNum.split("-");
         if(menuAndNum.equals("")){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
         }
         if(!menuAndNum.contains("-")){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
         }
         if(s.length == 1){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
         }
     }
     public void validateMenuName(HashMap<String,Integer> menusAndNums){
@@ -113,7 +115,7 @@ public class InputController {
         menu = List.of(s);
         for(String key : menusAndNums.keySet()){
             if(!menu.contains(key)){
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
             }
         }
         menuDuplicateCheck(menusAndNums);
@@ -133,7 +135,7 @@ public class InputController {
             }
         }
         if(count == 0){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(MANU_ERROR_MESSAGE);
         }
     }
 }
