@@ -48,3 +48,27 @@
    - 총 할인 금액 계산
 -----
 
+## 객체 분리
+
+View
+- InputView
+  - 입력 받아야하는 부분을 입력 받아주는 기능
+- OutputView
+  - 출력 해야하는 부분을 Model의 데이터를 활용해 출력
+
+Model
+- Consumer
+  - 소비자가 주문한 메뉴와 방문 날짜를 저장
+- EventDiscount
+  - 해당 날짜의 무슨 할인들이 들어갔는지 저장
+- Menu
+  - 메뉴들을 enum을 활용해 저장
+
+Controller
+- DiscountController
+  - 할인을 계산해주어 Model에 저장하는 로직
+- InputController
+  - 입력 값을 검토하고 잘 쪼개어 Consumer객체에 데이터 저장
+- TotalController
+
+---
